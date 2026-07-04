@@ -1,0 +1,17 @@
+# Model weights / artifact caches — distributed separately (see README + scripts/download_weights.py)
+cache/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# Local secrets / env
+.env
+
+# Pipeline outputs
+catboost_info/
+submission.zip
+*.zip
+!reference/*.zip
