@@ -120,4 +120,5 @@ nature of LLM sampling while following the same prompts/configuration.
 | HF connection errors on first `infer` | run step 3 explicitly, or set `HF_HOME` to a writable dir |
 | `verify_inference.py` mismatch | `scripts/download_weights.py --verify-only` (corrupted/partial weights are the only known cause) |
 | slow first run | the text_retriever encodes 80 queries live; on CPU this is minutes, with a GPU seconds |
+| `CUDA error: no kernel image is available for execution on the device` | `torch` is pinned to the CUDA 12.6 wheels (`pytorch-cu126`), which cover ~sm_50–sm_90 GPUs. A much newer card (Blackwell / RTX 50-series, needs `torch≥2.7` on the cu128 channel) or a very old one falls outside that range. Inference needs no GPU — just force CPU with `CUDA_VISIBLE_DEVICES="" uv run python run.py infer …`. For training on such a GPU, install a `torch` build matching its CUDA architecture. |
 | `no Gemini API key found` | export `GEMINI_API_KEY` (any value for the replay; real key for fresh generation) |
